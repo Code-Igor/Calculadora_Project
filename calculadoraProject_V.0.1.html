@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* textoooo*/
+
+        h1 {
+            text-align: center;
+            padding-top: 30px;
+            padding-bottom: 20px;
+        }
+
+        .custom-text {
+            color: white;
+        }
+
+
+        /* Visorrrrrrrrrrrrrr */
+        .input-group {
+            padding-bottom: 50px;
+            max-width: 80%;
+            margin: 50px auto;
+        }
+
+        .form-control {
+            height: 50px;
+            text-align: right;
+        }
+
+
+        /* botõessssssssssssss */
+        .btn {
+            width: 100%; 
+            height: 70px; 
+            font-size: 20px;
+            margin: 0; 
+            padding: 0; 
+        }
+
+        
+        button:hover {
+            background-color: #ff0000;
+        }
+
+     
+        /* demais organizaçõessssssssssssssssssss */
+        .container {
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        .border-top {
+          padding: 30px;
+        }
+
+        .row{
+            padding-bottom: 20px;
+        }
+    
+
+    </style>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Calculadora</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+</head>
+
+<body class="bg-black">
+    <div class="container border border-light rounded">
+        <!-- Título -->
+        <h1 class="text-center custom-text">Calculadora Project</h1>
+    
+        <!-- Visor e botão de reset -->
+        <div class="input-group mb-3">
+            <!-- Parte do display -->
+            <input type="text" id="visor" class="form-control" readonly placeholder="0">
+            <!-- Botãozinho que deleta tudo -->
+            <button type="submit" id="botao_visor" class="input-group-text" onclick="zerarVisor()">C</button>
+        </div>
+    
+        <!-- Calculadora em si 
+         PRIMEIRA LINHA BABY-->
+        <div class="container border-top border-light text-center">
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-outline-light" onclick="atualizaVisor(7)">7</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-outline-light" onclick="atualizaVisor(8)">8</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-outline-light" onclick="atualizaVisor(9)">9</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-outline-light" onclick="atualizaVisor('/')">÷</button>
+                </div>
+            </div>
+            <!-- Segunda linhaaaaauuuuuuuuuu -->
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-outline-light" onclick="atualizaVisor(4)">4</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-outline-light" onclick="atualizaVisor(5)">5</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-outline-light" onclick="atualizaVisor(6)">6</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-outline-light" onclick="atualizaVisor('*')">×</button>
+                </div>
+            </div>
+            <!-- Terceira linhaaaaaaa -->
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-outline-light" onclick="atualizaVisor(1)">1</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-outline-light" onclick="atualizaVisor(2)">2</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-outline-light" onclick="atualizaVisor(3)">3</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-outline-light" onclick="atualizaVisor('-')">-</button>
+                </div>
+            </div>
+            <!-- Quarta linhaaaaaaa -->
+            <div class="row">
+                <div class="col custom-col">
+                    <button type="button" class="btn btn-outline-light" onclick="atualizaVisor(0)">0</button>
+                </div>
+                <div class="col custom-col">
+                    <button type="button" class="btn btn-outline-light" onclick = "casaDecimal()">.</button>   
+                </div>
+                <div class="col custom-col">
+                    <button type="button" class="btn btn-outline-light" onclick="resultado()">=</button>
+                </div>
+                <div class="col custom-col">
+                    <button type="button" class="btn btn-outline-light" onclick="atualizaVisor('+')">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- SCRIPTSSSSSSSSSSSSSSSS-->
+     <script> 
+
+     // todas as const
+
+        const visor = document.getElementById("visor");
+
+     // funções
+
+        function atualizaVisor(valor) {
+            if (visor.value == 0) {
+                visor.value =  valor
+            }
+            else {
+                visor.value =  visor.value + valor 
+            }
+        }
+
+    
+        function zerarVisor(){
+            visor.value = 0
+        }
+
+
+        //no inicio eu fiz cada uma das operações separadamente, mas depois de uns erros e pesquisas descobri a função eval() e acabei a utilizando. Ela daz tudo que eu estava tetnadno fazer só que mehlor e bem mais resumido (basicamente a função avalia strings como expressões do JavaScript)
+        function resultado() {
+           visor.value = eval(document.getElementById('visor').value);
+        }
+
+
+        function casaDecimal () {
+           const partes = visor.value.split(/[\+\-\*\/]/);
+           const ultimoNumero = partes[partes.length - 1]; // vai pegar o ultimo numero da expressao para posteriormente adicionar o . caso necessário
+
+           if (!ultimoNumero || isNaN(ultimoNumero)) {
+        // if para evitar q o usuario comece com ".", assim se adiciona ".0"
+             visor.value += '0.';
+            }  else if (!ultimoNumero.includes('.')) {
+             visor.value += '.';
+            }
+        }
+        
+     </script>
+</body>
+
+</html>
